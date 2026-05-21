@@ -47,3 +47,25 @@ function gerarPDF() {
     
     doc.save('OS_' + new Date().getTime() + '.pdf');
 }
+function editarOS(osId) {
+    const historico = JSON.parse(localStorage.getItem('os_historico') || '[]');
+    const os = historico.find(o => o.id == osId);
+    if (!os) return;
+
+    editingOSId = osId;
+    
+    // Preenche os campos
+    document.getElementById('selCliente').value = os.clienteId;
+    carregarCliente(os.clienteId); // Função que você já deve ter
+    
+    setTimeout(() => {
+        document.getElementById('selEquipamento').value = os.equipamentoId;
+        document.getElementById('tNome').value = os.tecnico || '';
+        document.getElementById('tipo').value = os.tipo || '';
+        document.getElementById('servico').value = os.servico || '';
+        // ... adicione outros campos conforme necessário
+    }, 300);
+
+    switchTab('tab-os');
+    toast('Modo edição: O.S. #' + os.numero, 'warning');
+}
