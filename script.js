@@ -32,21 +32,18 @@ function gerarPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF('p', 'mm', 'a4');
 
-    doc.setFontSize(18);
-    doc.text("ORDEM DE SERVIÇO - MARLIFT", 10, 15);
-    doc.setFontSize(12);
-    doc.text("Equipamento: " + document.getElementById('selEquipamento').options[document.getElementById('selEquipamento').selectedIndex].text, 10, 25);
+    // ... (seu código de gerar PDF) ...
+
+    // Assinatura em Paisagem (Otimizado)
+    const canvas = document.getElementById('sigCanvas'); // Certifique-se que é o ID correto
+    if (canvas) {
+        const imgData = canvas.toDataURL('image/png');
+        // Adiciona no rodapé: pos(10, 250), tamanho(100x30)
+        doc.addImage(imgData, 'PNG', 10, 250, 100, 30);
+    }
     
-    doc.line(10, 30, 200, 30);
-    
-    // Assinatura em Paisagem
-    const canvas = document.getElementById('sigCanvas');
-    const imgData = canvas.toDataURL('image/png');
-    // Adiciona a imagem no rodapé (Dimensões 120x40mm para ficar bem visível na horizontal)
-    doc.addImage(imgData, 'PNG', 10, 250, 120, 40); 
-    
-    doc.save('OS_' + new Date().getTime() + '.pdf');
-}
+    doc.save('OS_' + document.getElementById('osNum').innerText + '.pdf');
+}}
 function editarOS(osId) {
     const historico = JSON.parse(localStorage.getItem('os_historico') || '[]');
     const os = historico.find(o => o.id == osId);
