@@ -307,11 +307,11 @@
             <select id="tipo" class="form-control" onchange="atualizarFluxoTriagem();autoSave();prog()">
               <option value="">Selecione...</option>
               <option value="Emergencial">🚨 Emergencial</option>
-              <option value="Corretivo">🔧 Corretivo</option>
-              <option value="Preventivo">✅ Preventivo</option>
+              <option value="Corretivo">🔧 Corretiva</option>
+              <option value="Preventivo">✅ Preventiva</option>
               <option value="Garantia">🛡️ Garantia</option>
               <option value="Orçamento">💰 Orçamento</option>
-              <option value="Instalação">🔩 Instalação</option>
+              <option value="Instalação">🔩 avaliação</option>
             </select>
           </div>
           <div class="form-group">
@@ -322,7 +322,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Defeito / Reclamação do Cliente</label>
+          <label class="form-label">Defeito Reclamado/Tipo de Preventiva</label>
           <input type="text" id="defeito" class="form-control" placeholder="Ex: Motor superaquecendo ao carregar" oninput="autoSave()">
         </div>
 
@@ -362,19 +362,8 @@
               <strong>Salvar como Agendamento</strong>
               <span>Registra no calendário para atendimento futuro</span>
             </div>
-          </button>
-          <button class="btn btn-atendimento btn-block" id="btnIniciarAtendimento" onclick="iniciarAtendimentoOS()">
-            <div class="btn-action-icon"><i class="fa-solid fa-play-circle"></i></div>
-            <div class="btn-action-text">
-              <strong>Iniciar Atendimento Agora</strong>
-              <span>Continua o preenchimento e inicia o cronômetro</span>
-            </div>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- CRONÔMETRO -->
+        
+   <!-- CRONÔMETRO -->
     <div class="card" id="cardCronometro" style="display:none">
       <div class="card-header">
         <div class="card-icon"><i class="fa-solid fa-stopwatch"></i></div>
@@ -428,7 +417,7 @@
           <select id="status" class="form-control" onchange="autoSave()">
             <option value="Concluído">✅ Concluído</option>
             <option value="Pendente">⏳ Pendente</option>
-            <option value="Agendado">📅 Agendado</option>
+            <option value="Agendado">📅 Novo Agendamento</option>
             <option value="Aguardando Peça">📦 Aguardando Peça</option>
             <option value="Orçamento Enviado">💰 Orçamento Enviado</option>
           </select>
@@ -477,21 +466,25 @@
           <button id="btnEditar" class="btn btn-warning btn-block mb-3" style="display:none" onclick="desbloquearOS()">
             <i class="fa-solid fa-unlock"></i> Editar OS (Desbloquear)
           </button>
-          <button id="btnAbrirSig" class="btn btn-outline btn-block" onclick="abrirModal('modalSig')">
-            <i class="fa-solid fa-signature"></i> Abrir Painel de Assinatura
-          </button>
-        </div>
-        <div class="divider"></div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <button id="btnPdf" class="btn btn-secondary btn-block btn-lg" onclick="gerarPDF()" disabled>
-            <i class="fa-solid fa-file-pdf"></i> Gerar e Baixar PDF
-          </button>
-          <button id="btnSalvar" class="btn btn-primary btn-block" onclick="salvarOS()">
-            <i class="fa-solid fa-floppy-disk"></i> Salvar OS no Histórico
-          </button>
-        </div>
-      </div>
+         <div id="modalSig" class="modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Assinatura do Cliente</h3>
+      <button class="modal-close" onclick="fecharModalAssinatura()">&times;</button>
     </div>
+    <div class="modal-body">
+      <canvas id="sigCanvas"></canvas>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" onclick="fecharModalAssinatura()">
+        <i class="fa-solid fa-xmark"></i> Cancelar
+      </button>
+      <button class="btn btn-primary" onclick="salvarAssinatura()">
+        <i class="fa-solid fa-check"></i> Confirmar
+      </button>
+    </div>
+  </div>
+</div>
 
   </div><!-- /tab-os -->
 
