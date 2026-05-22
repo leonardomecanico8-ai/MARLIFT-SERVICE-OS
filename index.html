@@ -177,7 +177,9 @@
           <label class="form-label"><i class="fa-solid fa-magnifying-glass"></i> Pesquisar no cadastro</label>
           <div class="d-flex gap-2">
             <select id="selCliente" class="form-control form-control-lg" style="flex:1" onchange="carregarCliente(this.value)">
-              <option value="">— Toque para selecionar o cliente —</option>
+  <option value="">— Toque para selecionar o cliente —</option>
+  <option value="MANUAL" style="font-weight:bold; color:var(--primary);">+ Preencher O.S. Manualmente</option>
+  </select>
             </select>
             <button class="btn btn-primary btn-icon" onclick="abrirModal('modalCli')" title="Cadastrar novo cliente">
               <i class="fa-solid fa-user-plus"></i>
