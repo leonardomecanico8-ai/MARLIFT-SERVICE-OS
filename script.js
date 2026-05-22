@@ -82,6 +82,26 @@ function editarOS(osId) {
       <button class="btn btn-primary" onclick="salvarAssinatura()">
         <i class="fa-solid fa-check"></i> Confirmar
       </button>
+   function carregarCliente(clienteId) {
+    // Verifica se é o modo manual
+    if (clienteId === "MANUAL") {
+        limparCliente(); // Limpa campos anteriores
+        document.getElementById('clienteCarregadoNome').innerText = "Preenchimento Manual";
+        document.getElementById('clienteCarregadoBadge').style.display = 'block';
+        document.getElementById('painelResumoCliente').style.display = 'none'; // Esconde resumo fixo
+        document.getElementById('cardSelEquip').style.display = 'block'; // Mostra seletor de equip
+        
+        // Habilita inputs para edição manual (remova o 'readonly' se tiver)
+        document.getElementById('cNome').value = "";
+        toast('Modo manual ativado', 'info');
+        return;
+    }
+
+    // ... (Sua lógica atual para carregar cliente do banco de dados) ...
+    if (!clienteId) return;
+    
+    // ... restante do seu código existente ...
+}
     </div>
   </div>
 </div>
