@@ -66,3 +66,22 @@ function editarOS(osId) {
     switchTab('tab-os');
     toast('Modo edição: O.S. #' + os.numero, 'warning');
 }
+<div id="modalSig" class="modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Assinatura do Cliente</h3>
+      <button class="modal-close" onclick="fecharModalAssinatura()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <canvas id="sigCanvas"></canvas>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" onclick="fecharModalAssinatura()">
+        <i class="fa-solid fa-xmark"></i> Cancelar
+      </button>
+      <button class="btn btn-primary" onclick="salvarAssinatura()">
+        <i class="fa-solid fa-check"></i> Confirmar
+      </button>
+    </div>
+  </div>
+</div>
