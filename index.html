@@ -411,33 +411,31 @@
       </div>
     </div>
 
-    <!-- CRONÔMETRO -->
-    <div class="card" id="cardCronometro" style="display:none">
-      <div class="card-header">
-        <div class="card-icon"><i class="fa-solid fa-stopwatch"></i></div>
-        <div>
-          <div class="card-title">Tempo de Atendimento</div>
-          <div class="card-subtitle">Seção 4 de 4</div>
-        </div>
+   <div class="card" id="cardTempoManual">
+  <div class="card-header">
+    <div class="card-icon"><i class="fa-solid fa-clock"></i></div>
+    <div>
+      <div class="card-title">Controle de Horário</div>
+      <div class="card-subtitle">Preenchimento manual do atendimento</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group" style="flex:1">
+        <label class="form-label">Início</label>
+        <input type="time" id="timeInicio" class="form-control" oninput="autoSave()">
       </div>
-      <div class="card-body">
-        <div class="timer-wrap">
-          <div id="timerDisp" class="timer-display">00:00:00</div>
-          <div class="timer-btns">
-            <button id="btnIni" class="btn btn-primary" onclick="iniciarTimer()">
-              <i class="fa-solid fa-play"></i> Iniciar
-            </button>
-            <button id="btnPau" class="btn btn-warning" disabled onclick="abrirModal('modalPausa')">
-              <i class="fa-solid fa-pause"></i> Pausar
-            </button>
-          </div>
-          <div id="timerLog" class="timer-log">
-            <div class="timer-log-item" style="color:rgba(255,255,255,0.28)">Aguardando início...</div>
-          </div>
-        </div>
+      <div class="form-group" style="flex:1">
+        <label class="form-label">Pausa</label>
+        <input type="time" id="timePausa" class="form-control" oninput="autoSave()">
+      </div>
+      <div class="form-group" style="flex:1">
+        <label class="form-label">Fim</label>
+        <input type="time" id="timeFim" class="form-control" oninput="autoSave()">
       </div>
     </div>
-
+  </div>
+</div>
     <!-- RELATÓRIO TÉCNICO -->
     <div class="card" id="cardRelatorio" style="display:none">
       <div class="card-header">
