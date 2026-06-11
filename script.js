@@ -64,10 +64,14 @@ function carregarOSParaAtendimento(idOS) {
     document.getElementById('eMarca').value = os.eqMarca || '';
     document.getElementById('eModelo').value = os.eqModelo || '';
     
+    // Carrega os novos campos de tempo
+    document.getElementById('timeInicio').value = os.timeInicio || '';
+    document.getElementById('timePausa').value = os.timePausa || '';
+    document.getElementById('timeFim').value = os.timeFim || '';
+    
     // Feedback visual
     switchTab('tab-os');
-    alert('OS ' + fmtNum(os.numero) + ' carregada para atendimento.');
-}
+}}
 // CONFIGURAÇÃO DOS ITENS DO CHECKLIST
 const itensPreventiva = [
     { cat: "Motor", item: "Troca de óleo do motor" },
