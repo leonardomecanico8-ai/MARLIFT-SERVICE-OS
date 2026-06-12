@@ -387,7 +387,7 @@
             <div class="btn-action-icon"><i class="fa-solid fa-play-circle"></i></div>
             <div class="btn-action-text">
               <strong>Iniciar Atendimento Agora</strong>
-              <span>Continua o preenchimento e inicia o cronômetro</span>
+              <span>Continua o preenchimento </span>
             </div>
           </button>
         </div>
@@ -915,37 +915,6 @@ function doGet(e) {
       <button class="btn btn-danger btn-lg" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i> Voltar</button>
       <button class="btn btn-ghost btn-lg" onclick="clearSig()"><i class="fa-solid fa-eraser"></i> Limpar</button>
       <button class="btn btn-success btn-lg" onclick="salvarSig()"><i class="fa-solid fa-check"></i> Salvar</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===== MODAL: PAUSA ===== -->
-<div id="modalPausa" class="modal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h3><i class="fa-solid fa-pause"></i> Motivo da Pausa</h3>
-      <button class="modal-close" onclick="fecharModal()">&times;</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Selecione o motivo</label>
-        <select id="motivoPausa" class="form-control" onchange="toggleMotivoOutro(this.value)">
-          <option>Intervalo de almoço</option>
-          <option>Aguardando peça</option>
-          <option>Aguardando liberação do equipamento</option>
-          <option>Deslocamento até fornecedor</option>
-          <option value="Outro">Outro...</option>
-        </select>
-      </div>
-      <div id="motivoOutroWrap" class="form-group" style="display:none">
-        <label class="form-label">Especifique o motivo</label>
-        <input type="text" id="motivoOutro" class="form-control" placeholder="Descreva o motivo...">
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-warning btn-block" onclick="confirmarPausa()">
-        <i class="fa-solid fa-pause"></i> Confirmar Pausa
-      </button>
     </div>
   </div>
 </div>
