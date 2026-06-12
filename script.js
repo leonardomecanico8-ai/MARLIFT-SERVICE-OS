@@ -1,4 +1,10 @@
-/* =============================================================
+document.addEventListener('DOMContentLoaded', () => {
+    alert("O sistema carregou com sucesso!");
+    // Esconde login e inicia abas
+    const login = document.getElementById('loginScreen');
+    if (login) login.style.display = 'none';
+    switchTab('tab-dash');
+});/* =============================================================
    MARLIFT SERVICE - Sistema OS v3.2 (Completo e Corrigido)
    ============================================================= */
 
