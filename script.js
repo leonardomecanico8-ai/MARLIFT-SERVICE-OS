@@ -72,30 +72,3 @@ function carregarOSParaAtendimento(idOS) {
     // Feedback visual
     switchTab('tab-os');
 }}
-// CONFIGURAÇÃO DOS ITENS DO CHECKLIST
-const itensPreventiva = [
-    { cat: "Motor", item: "Troca de óleo do motor" },
-    { cat: "Motor", item: "Filtro do óleo do motor" },
-    { cat: "Motor", item: "Limpeza filtro de ar" },
-    { cat: "Transmissão", item: "Nível óleo transmissão" },
-    { cat: "Hidráulico", item: "Nível óleo hidráulico" },
-    { cat: "Freios", item: "Fluido e ajuste de freio" },
-    { cat: "Rodas e Pneus", item: "Estado dos pneus" },
-    { cat: "Segurança", item: "Luzes, buzina e sirene" }
-];
-
-function carregarChecklist() {
-    const corpo = document.getElementById('corpoChecklist');
-    corpo.innerHTML = '';
-    itensPreventiva.forEach((obj, index) => {
-        corpo.innerHTML += `
-            <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid #eee; padding-bottom:5px;">
-                <span style="font-size:13px; align-self:center;">${obj.item}</span>
-                <select id="ck_${index}" class="form-control" style="width:100px;">
-                    <option>OK</option>
-                    <option>Reparar</option>
-                    <option>Substituído</option>
-                </select>
-            </div>`;
-    });
-}
