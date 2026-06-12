@@ -1,74 +1,56 @@
 /* =============================================================
-   MARLIFT SERVICE - Sistema OS v3.0
+   MARLIFT SERVICE - Sistema OS v3.1 (Versão Corrigida)
    ============================================================= */
 
-// ... (Mantenha todo o seu código original aqui até chegar na função renderHist) ...
+// Inicialização: Remove login e carrega direto
+document.addEventListener('DOMContentLoaded', () => {
+    // Esconde tela de login se existir
+    const login = document.getElementById('loginScreen');
+    if (login) login.style.display = 'none';
+    
+    // Carrega o dashboard e dados
+    switchTab('tab-dash');
+    renderHist(); 
+});
 
-/* ===== HISTÓRICO ===== */
-function renderHist() {
-  const el = document.getElementById('osList');
-  const tot = document.getElementById('totalOS');
-  if (!el) return;
-  const hist = JSON.parse(localStorage.getItem('os_historico') || '[]');
-  
-  if (tot) tot.textContent = hist.length;
+// Correção: Gerar PDF com fotos
+async function gerarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    doc.setFontSize(16);
+    doc.text("Ordem de Servico: " + document.getElementById('osNum').innerText, 10, 15);
+    doc.setFontSize(12);
+    doc.text("Cliente: " + document.getElementById('cNome').value, 10, 25);
+    doc.text("Servico: " + document.getElementById('servico').value, 10, 35);
+    doc.text("Inicio: " + document.getElementById('timeInicio').value + " | Pausa: " + document.getElementById('timePausa').value + " | Fim: " + document.getElementById('timeFim').value, 10, 45);
 
-  if (hist.length === 0) {
-    el.innerHTML = '<div class="os-empty"><i class="fa-solid fa-folder-open"></i><p>Nenhuma OS registrada ainda.</p></div>';
-    return;
-  }
+    const fotos = document.querySelectorAll('.photos-grid img');
+    let y = 60;
 
-  const statusBadge = {
-    'Concluído': 'badge-green', 'Concluido': 'badge-green',
-    'Pendente': 'badge-orange', 'Aguardando Peça': 'badge-blue',
-    'Orçamento Enviado': 'badge-purple', 'Agendado': 'badge-blue'
-  };
-
-  el.innerHTML = hist.map(os => {
-    const dt = new Date(os.data);
-    return `<div class="os-card">
-        <div class="os-card-top">
-            <div class="os-card-info">
-                <div class="os-num">${fmtNum(os.numero)} — ${dt.toLocaleDateString('pt-BR')}</div>
-                <div class="os-cliente">${esc(os.cliNome)}</div>
-                <div class="os-meta">${esc(os.eqMarca || '')} ${esc(os.eqModelo || '')}</div>
-                <div class="os-tags"><span class="badge ${statusBadge[os.status] || 'badge-gray'}">${esc(os.status || '--')}</span></div>
-            </div>
-        </div>
-        <div class="os-actions">
-            <button class="btn btn-atendimento-sm btn-sm" onclick="carregarOSParaAtendimento('${os.id}')">
-                <i class="fa-solid fa-play-circle"></i> Atender
-            </button>
-            <button class="btn btn-ghost btn-sm" onclick="verOS('${os.id}')"><i class="fa-solid fa-eye"></i> Ver</button>
-            <button class="btn btn-secondary btn-sm" onclick="gerarPDFPorId('${os.id}')"><i class="fa-solid fa-file-pdf"></i> PDF</button>
-        </div>
-    </div>`;
-  }).join('');
+    for (let i = 0; i < fotos.length; i++) {
+        if (y > 220) {
+            doc.addPage();
+            y = 10;
+        }
+        doc.addImage(fotos[i].src, 'JPEG', 10, y, 60, 60);
+        y += 70;
+    }
+    
+    doc.save('OS_' + document.getElementById('osNum').innerText + '.pdf');
 }
 
-// ... (Mantenha todo o restante do seu arquivo original aqui) ...
+// Função de salvamento com campos manuais
+function autoSave() {
+    // Lógica simples de salvar no localStorage
+    const data = {
+        timeInicio: document.getElementById('timeInicio').value,
+        timePausa: document.getElementById('timePausa').value,
+        timeFim: document.getElementById('timeFim').value,
+        // ... outros campos que você já tinha
+    };
+    localStorage.setItem('os_temporaria', JSON.stringify(data));
+}
 
-/* ===== NOVA FUNÇÃO DE ATENDIMENTO (Adicione isto ao final do arquivo) ===== */
-function carregarOSParaAtendimento(idOS) {
-    const historico = JSON.parse(localStorage.getItem('os_historico') || '[]');
-    const os = historico.find(o => o.id === idOS);
-
-    if (!os) {
-        alert('Erro: OS não encontrada!');
-        return;
-    }
-
-    // Carrega dados básicos
-    editingOSId = os.id;
-    document.getElementById('cNome').value = os.cliNome || '';
-    document.getElementById('eMarca').value = os.eqMarca || '';
-    document.getElementById('eModelo').value = os.eqModelo || '';
-    
-    // Carrega os novos campos de tempo
-    document.getElementById('timeInicio').value = os.timeInicio || '';
-    document.getElementById('timePausa').value = os.timePausa || '';
-    document.getElementById('timeFim').value = os.timeFim || '';
-    
-    // Feedback visual
-    switchTab('tab-os');
-}}
+// Manter o restante das suas funções de navegação e busca (switchTab, renderHist, etc.)
+// ... (Cole suas outras funções aqui) ...
